@@ -1,6 +1,6 @@
 # swift-drop
 
-Welcome to our Product Delivery App Project!
+Welcome to our Product Delivery App Project (Swift-Drop)!
 
 This is a mobile application designed to deliver products from markets within your local area. We will be developing the frontend using Flutter and building the backend with Node.js / Express (TypeScript + MongoDB).
 
