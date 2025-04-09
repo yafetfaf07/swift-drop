@@ -1,12 +1,12 @@
-import * as noteController from "../controllers/userController";
+import * as userController from "../controllers/userController";
 import express from "express";
 
 const router = express.Router();
 
-router.post('/signup',noteController.createUser);
-router.get("/notes/:id",noteController.getNotesfromUser)
+router.post('/signup',userController.createUser);
+router.get("/notes/:id",userController.getNotesfromUser)
 // router.post("/notes/:id", noteController.createNoteForUser)
-router.get("/", noteController.getAllUser);
-router.get("/login/:username", noteController.login);
+router.get("/", userController.getAllUser);
+router.get("/login/:username", userController.login);
 
 export default router
