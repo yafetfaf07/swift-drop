@@ -1,6 +1,6 @@
 import { model, Schema, Types } from 'mongoose';
 
-const merchantSchema = new Schema({
+const productSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -26,7 +26,7 @@ const merchantSchema = new Schema({
   //   notes: [{ type: Schema.Types.ObjectId, ref: 'Note' }],
 });
 
-type Merchant = {
+type Product = {
   _id: Types.ObjectId;
   name: string,
   category:string,
@@ -37,4 +37,4 @@ type Merchant = {
   //   notes: Types.ObjectId[];
 };
 
-export default model<Merchant>('Merchant', merchantSchema);
+export default model<Product>('Product', productSchema);
