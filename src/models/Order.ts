@@ -1,0 +1,44 @@
+import { model, Schema, Types } from 'mongoose';
+
+const orderSchema = new Schema({
+  uid: {
+    type: Types.ObjectId,
+    required: true,
+    unique: true,
+  },
+
+  pid: {
+    type: Types.ObjectId,
+    required: true,
+    unique:true
+  },
+  mid: {
+    type:Types.ObjectId,
+    required:true,
+    unique:true
+  },
+  status: {
+    type: String,
+    default:"unpaid"
+  },
+  total: {
+    type: Number,
+    required: true,
+  },
+  //   notes: [{ type: Schema.Types.ObjectId, ref: 'Note' }],
+});
+
+type Order = {
+  _id: Types.ObjectId;
+  uid:Types.ObjectId;
+  mid:Types.ObjectId,
+  pid:Types.ObjectId
+  name: string,
+  category:string,
+  price:number,
+  total:number
+
+  //   notes: Types.ObjectId[];
+};
+
+export default model<Order>('Order', orderSchema);
