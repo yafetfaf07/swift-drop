@@ -19,6 +19,10 @@ const merchantSchema = new Schema({
     type: Number,
     required: true,
   },
+  imageUrl: {
+    type:String,
+    required:true
+  }
   //   notes: [{ type: Schema.Types.ObjectId, ref: 'Note' }],
 });
 
@@ -27,7 +31,8 @@ type Merchant = {
   name: string,
   category:string,
   price:number,
-  quantity:number
+  quantity:number,
+  imageUrl:string
 
   //   notes: Types.ObjectId[];
 };
