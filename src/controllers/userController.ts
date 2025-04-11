@@ -2,41 +2,40 @@ import createHttpError from 'http-errors';
 import user from '../models/User';
 import { RequestHandler } from 'express';
 import * as argon2 from 'argon2'; // used for hashing password
-
-interface createUser {
-  username?: string;
-  email?: string;
-  password?: string;
-}
+import {UserDTO} from "../dto/Userdto";
 
 // For creating user
 export const createUser: RequestHandler<
   unknown,
   unknown,
-  createUser,
+  UserDTO,
   unknown
 > = async (req, res, next) => {
-  const username = req.body.username;
-  const email = req.body.email;
+  const firstname = req.body.firstname;
+  const lastname = req.body.lastname;
   const passwordRaw = req.body.password;
+  const address = req.body.address;
+  const phone_no=req.body.phone_no;
   try {
-    if (!username || !email || !passwordRaw) {
+    if (!firstname || !lastname || !passwordRaw || !address) {
       throw createHttpError(400, 'Please enter valid credentials ');
     }
     const existingUser = await user
       .findOne({
-        username: username,
-        email: email,
+        phone_no:phone_no ,
       })
       .exec();
     if (existingUser) {
       throw createHttpError(409, 'This user already exists'); // conflict
     }
-    const hashedPassword = await argon2.hash(passwordRaw);
+    // This is 
+    // const hashedPassword = await argon2.hash(passwordRaw);
     const newUser = await user.create({
-      username: username,
-      email: email,
-      password: hashedPassword,
+      firstname: firstname,
+      lastname: lastname,
+      password: passwordRaw,
+      address:address,
+      phone_no:phone_no
     });
 
     res.status(201).json(newUser);
