@@ -59,9 +59,9 @@ export const getNotesfromUser: RequestHandler = async (req, res, next) => {
     next(error);
   }
 };
-interface UserId {
-    id?:string
-}
+// interface UserId {
+//     id?:string
+// }
 // interface createNotes {
 //     title?:string,
 //     text?:string
