@@ -9,12 +9,10 @@ const orderSchema = new Schema({
 
   pid: {
     type: Types.ObjectId,
-    required: true,
     unique: true,
   },
   mid: {
     type: Types.ObjectId,
-    required: true,
     unique: true,
   },
   status: {
@@ -23,7 +21,6 @@ const orderSchema = new Schema({
   },
   total: {
     type: Number,
-    required: true,
   },
   user: { types: Schema.Types.ObjectId, ref: 'User' },
   products: [{ types: Schema.Types.ObjectId, ref: 'Product' }],

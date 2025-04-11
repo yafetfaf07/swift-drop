@@ -20,10 +20,10 @@ const deliverSchema = new Schema({
     type: [Number],
     required: true,
   },
-  oid:{
+  oid:[{
     type:Schema.Types.ObjectId,
     required:false
-  },
+  }],
 
   password: {
     type: String,

@@ -10,21 +10,17 @@ const productSchema = new Schema({
 
   category: {
     type: String,
-  
   },
   price: {
     type: Number,
-
   },
   quantity: {
     type: Number,
-   
   },
   imageUrl: {
     type: String,
- 
   },
-  //   notes: [{ type: Schema.Types.ObjectId, ref: 'Note' }],
+  comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
 });
 
 type Product = {
