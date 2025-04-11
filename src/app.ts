@@ -1,5 +1,4 @@
 import express, { NextFunction, Request, Response } from 'express';
-import routerNotes from './routes/noteroutes';
 import morgan from 'morgan';
 import createHttpError, {isHttpError}from 'http-errors';
 import userRoutes from "./routes/userrouter";
@@ -12,7 +11,6 @@ app.use(express.json());
 
 
 
-app.use('/api/notes', routerNotes);
 app.use('/api/users', userRoutes)
 
 app.use((req, res, next) => {
