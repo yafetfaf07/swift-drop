@@ -33,6 +33,7 @@ const deliverSchema = new Schema({
 
 
 //   notes: [{ type: Schema.Types.ObjectId, ref: 'Note' }],
+orders:[{type:Schema.Types.ObjectId, ref:"Order"}]
 });
 
 type DeliverPersonnel = {
@@ -41,7 +42,7 @@ type DeliverPersonnel = {
   lastname:string,
   phone_no:string,
   address:string[],
-  oid:Types.ObjectId,
+  oid:Types.ObjectId[],
   password: string;
 
 //   notes: Types.ObjectId[];

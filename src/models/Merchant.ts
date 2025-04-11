@@ -1,5 +1,4 @@
 import { model, Schema, Types } from 'mongoose';
-
 const merchantSchema = new Schema({
   firstname: {
     type: String,
@@ -20,9 +19,9 @@ const merchantSchema = new Schema({
     type: [Number],
     required: true,
   },
-  oid:{
-    type:Schema.Types.ObjectId,
-    required:false
+  oid: {
+    type: Schema.Types.ObjectId,
+    required: false,
   },
 
   password: {
@@ -31,21 +30,21 @@ const merchantSchema = new Schema({
     select: false,
   },
 
-
-//   notes: [{ type: Schema.Types.ObjectId, ref: 'Note' }],
+  products: [{ type: Schema.Types.ObjectId, ref: 'Product' }],
+  orders: [{ type: Schema.Types.ObjectId, ref: 'Order' }],
 });
 
 type Merchant = {
   _id: Types.ObjectId;
-  firstname:string,
-  lastname:string,
-  phone_no:string,
-  address:string[2],
-  oid:Types.ObjectId,
-  pid:Types.ObjectId
+  firstname: string;
+  lastname: string;
+  phone_no: string;
+  address: string[2];
+  oid: Types.ObjectId[]; // order id
+  pid: Types.ObjectId[]; // product id
   password: string;
 
-//   notes: Types.ObjectId[];
+  //   notes: Types.ObjectId[];
 };
 
 export default model<Merchant>('Merchant', merchantSchema);

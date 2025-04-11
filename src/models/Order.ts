@@ -10,33 +10,36 @@ const orderSchema = new Schema({
   pid: {
     type: Types.ObjectId,
     required: true,
-    unique:true
+    unique: true,
   },
   mid: {
-    type:Types.ObjectId,
-    required:true,
-    unique:true
+    type: Types.ObjectId,
+    required: true,
+    unique: true,
   },
   status: {
     type: String,
-    default:"unpaid"
+    default: 'unpaid',
   },
   total: {
     type: Number,
     required: true,
   },
+  user: { types: Schema.Types.ObjectId, ref: 'User' },
+  products: [{ types: Schema.Types.ObjectId, ref: 'Product' }],
+  merchant: { types: Schema.Types.ObjectId },
   //   notes: [{ type: Schema.Types.ObjectId, ref: 'Note' }],
 });
 
 type Order = {
   _id: Types.ObjectId;
-  uid:Types.ObjectId;
-  mid:Types.ObjectId,
-  pid:Types.ObjectId
-  name: string,
-  category:string,
-  price:number,
-  total:number
+  uid: Types.ObjectId;
+  mid: Types.ObjectId;
+  pid: Types.ObjectId[];
+  name: string;
+  category: string;
+  price: number;
+  total: number;
 
   //   notes: Types.ObjectId[];
 };
