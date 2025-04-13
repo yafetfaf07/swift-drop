@@ -7,6 +7,9 @@ import { MerchantController } from './controllers/merchantController';
 import { MerchantRouter } from './routes/merchantrouter';
 import { UserService } from './services/UserService';
 import { UserController } from './controllers/userController';
+import { ProductService } from './services/ProductService';
+import { ProductController } from './controllers/productController';
+import { ProductRouter } from './routes/productrouter';
 const app = express();
 
 app.use(morgan('dev')); // used for better debugging for mongodb databases
@@ -25,8 +28,16 @@ const UserServices = new UserService();
 const UserControllers = new UserController(UserServices);
 const UserRouters = new UserRouter(UserControllers);
 
+// This is for Product (This is where DI is happening)
+
+const ProductServices = new ProductService();
+const ProductControllers = new ProductController(ProductServices);
+const ProductRouters = new ProductRouter(ProductControllers);
+
+
 app.use('/api/users', UserRouters.registerRoutes())
-app.use('/api/merchant',MerchantRoutes.registerRoutes())
+app.use('/api/merchant',MerchantRoutes.registerRoutes());
+app.use('/api/product',ProductRouters.registerRoutes());
 
 app.use((req, res, next) => {
   next(createHttpError(404,'Endpoint not found'));
