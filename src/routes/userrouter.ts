@@ -1,12 +1,18 @@
-import * as userController from "../controllers/userController";
+import { UserController } from "../controllers/userController";
 import express from "express";
 
-const router = express.Router();
-
-router.post('/signup',userController.createUser);
-router.get("/notes/:id",userController.getNotesfromUser)
-// router.post("/notes/:id", noteController.createNoteForUser)
-router.get("/", userController.getAllUser);
-router.get("/login/:username", userController.login);
-
-export default router
+export class UserRouter {
+    private _controller: UserController;
+    router;
+    constructor(cs: UserController) {
+        this._controller = cs;
+        this.router = express.Router();
+    }
+    registerRoutes() {
+        this.router.post('/signup', this._controller.createUser);
+        // this.router.get('/getAllUser', this._controller.getAllUser);
+        // this.router.post('/getUserByPhoneNumber', this._controller.getUserByPhoneNumber);
+        this.router.post('/login', this._controller.login);
+        return this.router;
+    }
+}

@@ -5,7 +5,7 @@ import { MerchantDTO, MerchantLogin } from '../dto/Merchantdto';
 import { MerchantService } from '../services/MerchantService';
 
 export class MerchantController {
-  private readonly __services: MerchantService;
+  private  __services: MerchantService;
   constructor(ms: MerchantService) {
     this.__services = ms;
   }
@@ -20,7 +20,8 @@ export class MerchantController {
         if (!firstname || !lastname || !passwordRaw || !address || !phone_no) {
           throw createHttpError(400, 'Please enter valid credentials ');
         }
-        const existingUser = await this.__services.getAllMerchant();
+        console.log("From the controller",firstname, lastname,passwordRaw, address, phone_no)
+        const existingUser = await this.__services.getMerchantByPhoneNumber(phone_no);
         if (existingUser) {
           throw createHttpError(409, 'This user already exists'); // conflict
         }
@@ -31,8 +32,8 @@ export class MerchantController {
           firstname,
           lastname,
           passwordRaw,
-          address,
           phone_no,
+          address,
         );
 
         res.status(201).json(newMerchant);
