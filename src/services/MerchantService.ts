@@ -6,8 +6,12 @@ export class MerchantService {
     return await Merchant.find().exec();
   }
 
-  async getMerchantByPhoneNumber(phone_no: string, ) {
-    return await Merchant.findOne({ phone_no: phone_no, }).exec();
+  async login(phone_no: string,password:string ) {
+    return await Merchant.findOne({ phone_no: phone_no, password:password }).exec();
+  }
+
+  async getMerchantByPhoneNumber(phone_no: string ) {
+    return await Merchant.findOne({ phone_no: phone_no }).exec();
   }
 
   async createMerchant(
