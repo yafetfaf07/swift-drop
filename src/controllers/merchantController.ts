@@ -5,7 +5,7 @@ import { MerchantDTO, MerchantLogin } from '../dto/Merchantdto';
 import { MerchantService } from '../services/MerchantService';
 
 export class MerchantController {
-  private  __services: MerchantService;
+  private __services: MerchantService;
   constructor(ms: MerchantService) {
     this.__services = ms;
   }
@@ -20,8 +20,9 @@ export class MerchantController {
         if (!firstname || !lastname || !passwordRaw || !address || !phone_no) {
           throw createHttpError(400, 'Please enter valid credentials ');
         }
-        console.log("From the controller",firstname, lastname,passwordRaw, address, phone_no)
-        const existingUser = await this.__services.getMerchantByPhoneNumber(phone_no);
+
+        const existingUser =
+          await this.__services.getMerchantByPhoneNumber(phone_no);
         if (existingUser) {
           throw createHttpError(409, 'This user already exists'); // conflict
         }
@@ -60,27 +61,23 @@ export class MerchantController {
 
   // For login purposes
 
-  login: RequestHandler<MerchantLogin, unknown, unknown, unknown> = async (
+  login: RequestHandler<unknown, unknown, MerchantLogin, unknown> = async (
     req,
     res,
     next,
   ) => {
-    const phone_no = req.params.phone_no;
-    const password = req.params.password;
+    const phone_no = req.body.phone_no;
+    const password = req.body.password;
 
-    if (!phone_no) {
+    if (!phone_no || !password) {
       throw createHttpError(400, 'Please enter a username');
     }
-
-    const foundUser = await Merchant.findOne({
-      phone_no: phone_no,
-      password: password,
-    });
-
     try {
-      if (!foundUser) {
+      const loginUser = await this.__services.login(phone_no, password);
+      if (!loginUser) {
         throw createHttpError(404, "User doesn't exist");
       }
+      res.status(200).json(loginUser);
     } catch (error) {
       next(error);
     }

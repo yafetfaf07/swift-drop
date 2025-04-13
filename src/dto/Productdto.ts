@@ -15,5 +15,8 @@ export interface ProductDetailDTO {
     price:number,
     quantity:number,
     imageUrl:string,
-    mid:Schema.Types.ObjectId
+}
+
+export interface ProductId {
+    id:Schema.Types.ObjectId
 }
