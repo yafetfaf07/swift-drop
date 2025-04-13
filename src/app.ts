@@ -1,7 +1,12 @@
 import express, { NextFunction, Request, Response } from 'express';
 import morgan from 'morgan';
 import createHttpError, {isHttpError}from 'http-errors';
-import userRoutes from "./routes/userrouter";
+import  { UserRouter } from "./routes/userrouter";
+import { MerchantService } from './services/MerchantService';
+import { MerchantController } from './controllers/merchantController';
+import { MerchantRouter } from './routes/merchantrouter';
+import { UserService } from './services/UserService';
+import { UserController } from './controllers/userController';
 const app = express();
 
 app.use(morgan('dev')); // used for better debugging for mongodb databases
@@ -9,9 +14,19 @@ app.use(morgan('dev')); // used for better debugging for mongodb databases
 // this is used for sending json data to our server mostly for our headers
 app.use(express.json());
 
+// This is for merchant (This is where DI is happening)
+const MerchantServices = new MerchantService();
+const MerchantControllers = new MerchantController(MerchantServices);
+const MerchantRoutes = new MerchantRouter(MerchantControllers);
 
+// This is for User (This is where DI is happening)
 
-app.use('/api/users', userRoutes)
+const UserServices = new UserService();
+const UserControllers = new UserController(UserServices);
+const UserRouters = new UserRouter(UserControllers);
+
+app.use('/api/users', UserRouters.registerRoutes())
+app.use('/api/merchant',MerchantRoutes.registerRoutes())
 
 app.use((req, res, next) => {
   next(createHttpError(404,'Endpoint not found'));
