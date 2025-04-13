@@ -11,5 +11,6 @@ Please make sure to only commit files related to this project. No more sending d
 If you encounter issues related to Git or GitHub, try to resolve them on your own first. This is a great opportunity to level up your skills and get a feel for real-world development.
 
 Welcome to the world of professional software development, where merge conflicts and bugs can sometimes feel like nightmares 🐞😅—just kidding (sort of)! Let’s make this an awesome journey together.
+If you want to contribute please always try to create new branches and create pull request if any file is modified
 
 P.S. This README will be updated once the project is complete.
