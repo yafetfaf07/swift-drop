@@ -3,6 +3,7 @@ import { model, Schema, Types } from 'mongoose';
 const productSchema = new Schema({
   mid: {
     type: Schema.Types.ObjectId,
+    required: true,
   },
   name: {
     type: String,
@@ -19,6 +20,7 @@ const productSchema = new Schema({
   },
   imageUrl: {
     type: String,
+    required: true,
   },
   comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
 });
@@ -30,6 +32,8 @@ type Product = {
   price: number;
   quantity: number;
   imageUrl: string;
+  mid: Types.ObjectId;
+  comments: Types.ObjectId[];
 
   //   notes: Types.ObjectId[];
 };

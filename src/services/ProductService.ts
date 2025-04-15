@@ -1,21 +1,21 @@
 import Product from "../models/Product";
-import { Schema } from "mongoose";
+import mongoose from "mongoose";
 export class ProductService {
     async createProduct(
         name: string,
         price: number,
-        image: string,
+        imageUrl: string,
         category: string,
         quantity: number,
-        merchant_id: Schema.Types.ObjectId,
+        merchantId: mongoose.Types.ObjectId,
     ) {
         return await Product.create({
         name: name,
         price: price,
-        image: image,
+        imageUrl: imageUrl,
         category: category,
         quantity:quantity,
-        merchant_id: merchant_id,
+        mid: merchantId,
         });
     }
     
