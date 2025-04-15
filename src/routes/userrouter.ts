@@ -9,10 +9,10 @@ export class UserRouter {
         this.router = express.Router();
     }
     registerRoutes() {
-        this.router.post('/signup', this._controller.createUser);
+        this.router.post('/signup', this._controller.createUser.bind(this._controller));
         // this.router.get('/getAllUser', this._controller.getAllUser);
         // this.router.post('/getUserByPhoneNumber', this._controller.getUserByPhoneNumber);
-        this.router.post('/login', this._controller.login);
+        this.router.post('/login', this._controller.login.bind(this._controller));
         return this.router;
     }
 }
