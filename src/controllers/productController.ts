@@ -1,7 +1,8 @@
 import createHttpError from 'http-errors';
-import { ProductDetailDTO, ProductId } from '../dto/Productdto';
+import { ProductDetailDTO } from '../dto/Productdto';
 import { RequestHandler } from 'express';
 import { ProductService } from '../services/ProductService';
+import mongoose from 'mongoose';
 
 // This is for creaing product
 export class ProductController {
@@ -9,21 +10,21 @@ export class ProductController {
   constructor(ps: ProductService) {
     this._services = ps;
   }
-  createProduct: RequestHandler<ProductId, unknown, ProductDetailDTO, unknown> =
+  createProduct: RequestHandler<{ id: string }, unknown, ProductDetailDTO> =
     async (req, res, next) => {
-      const merchantId = req.params.id;
+      const merchantId = new mongoose.Types.ObjectId(req.params.id);
       const name = req.body.name;
       const category = req.body.category;
-      const imageUrl = req.body.imageUrl;
+      const imageUrl = `uploads/${req.file?.filename}`;
       const price = req.body.price;
       const quantity = req.body.quantity;
       try {
         if (
-          !name ||
-          !category ||
-          !imageUrl ||
-          !price ||
-          !quantity ||
+          !name &&
+          !category &&
+          !imageUrl &&
+          !price &&
+          !quantity &&
           !merchantId
         ) {
           throw createHttpError(400, 'Please enter full info');
@@ -33,17 +34,20 @@ export class ProductController {
         if (existingProduct) {
           throw createHttpError(409, 'This product exist in stock');
         }
+
+        // console.log("Data: ",{name, category, imageUrl, price, quantity, merchantId});
         const newProduct = await this._services.createProduct(
           name,
           price,
           imageUrl,
           category,
           quantity,
-          merchantId,
+          merchantId
         );
-
+          
         res.status(201).json(newProduct);
       } catch (error) {
+        console.error("Error in Product Controller",error)
         next(error);
       }
     };
