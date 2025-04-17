@@ -17,11 +17,12 @@ const userSchema = new Schema({
     unique: true,
   },
   address: {
-    type: [Number],
+    latitude: Number,
+    longitude: Number,
     // required: true,
   },
-  oid:{
-    type:Schema.Types.ObjectId,
+  oid: {
+    type: Schema.Types.ObjectId,
     // required:false
   },
 
@@ -31,20 +32,22 @@ const userSchema = new Schema({
     select: false,
   },
 
-
-//   notes: [{ type: Schema.Types.ObjectId, ref: 'Note' }],
+  //   notes: [{ type: Schema.Types.ObjectId, ref: 'Note' }],
 });
 
 type User = {
   _id: Types.ObjectId;
-  firstname:string,
-  lastname:string,
-  phone_no:string,
-  address:string[],
-  oid:Types.ObjectId,
+  firstname: string;
+  lastname: string;
+  phone_no: string;
+  address: {
+    latitude: number;
+    longitude: number;
+  };
+  oid: Types.ObjectId;
   password: string;
 
-//   notes: Types.ObjectId[];
+  //   notes: Types.ObjectId[];
 };
 
 export default model<User>('User', userSchema);

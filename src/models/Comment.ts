@@ -3,18 +3,20 @@ import { model, Schema, Types } from 'mongoose';
 const commentSchema = new Schema({
   mid: {
     type: Schema.Types.ObjectId,
+    required:true
   },
   uid: {
     type: Schema.Types.ObjectId,
+    required:true
   },
 
   content: {
     type: String,
-  
+    required: true,
   },
   rating: {
     type: Number,
-
+    required: true,
   },
 });
 

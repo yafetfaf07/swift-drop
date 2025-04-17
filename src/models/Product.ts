@@ -4,25 +4,29 @@ const productSchema = new Schema({
   mid: {
     type: Schema.Types.ObjectId,
     required: true,
+    ref: 'Merchant',
   },
   name: {
     type: String,
+    required:true
   },
 
   category: {
     type: String,
+    required: true,
   },
   price: {
     type: Number,
+    required: true,
   },
   quantity: {
     type: Number,
+    required: true,
   },
   imageUrl: {
     type: String,
     required: true,
   },
-  comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
 });
 
 type Product = {
@@ -33,7 +37,6 @@ type Product = {
   quantity: number;
   imageUrl: string;
   mid: Types.ObjectId;
-  comments: Types.ObjectId[];
 
   //   notes: Types.ObjectId[];
 };

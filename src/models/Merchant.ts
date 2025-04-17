@@ -16,22 +16,18 @@ const merchantSchema = new Schema({
     // unique: true,
   },
   address: {
-    type: [Number],
+    type: {},
     // required: true,
   },
-  oid: {
-    type: Schema.Types.ObjectId,
-    // required: false,
-  },
+
+
 
   password: {
     type: String,
-    // required: true,
+    required: true,
     // select: false,
   },
 
-  products: [{ type: Schema.Types.ObjectId, ref: 'Product' }],
-  orders: [{ type: Schema.Types.ObjectId, ref: 'Order' }],
 });
 
 type Merchant = {
@@ -39,9 +35,9 @@ type Merchant = {
   firstname: string;
   lastname: string;
   phone_no: string;
-  address: string[2];
-  oid: Types.ObjectId[]; // order id
-  pid: Types.ObjectId[]; // product id
+  address: {latitude: number; longitude: number};
+  // oid: Types.ObjectId[]; // order id
+  // pid: Types.ObjectId[]; // product id
   password: string;
 
   //   notes: Types.ObjectId[];

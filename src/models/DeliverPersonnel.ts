@@ -4,12 +4,10 @@ const deliverSchema = new Schema({
   firstname: {
     type: String,
     required: true,
-    unique: false,
   },
   lastname: {
     type: String,
     required: true,
-    unique: false,
   },
   phone_no: {
     type: String,
@@ -17,23 +15,15 @@ const deliverSchema = new Schema({
     unique: true,
   },
   address: {
-    type: [Number],
+    type: {},
     required: true,
   },
-  oid:[{
-    type:Schema.Types.ObjectId,
-    required:false
-  }],
+
 
   password: {
     type: String,
     required: true,
-    select: false,
   },
-
-
-//   notes: [{ type: Schema.Types.ObjectId, ref: 'Note' }],
-orders:[{type:Schema.Types.ObjectId, ref:"Order"}]
 });
 
 type DeliverPersonnel = {
@@ -42,10 +32,8 @@ type DeliverPersonnel = {
   lastname:string,
   phone_no:string,
   address:string[],
-  oid:Types.ObjectId[],
   password: string;
 
-//   notes: Types.ObjectId[];
 };
 
 export default model<DeliverPersonnel>('DeliverPersonnel', deliverSchema);

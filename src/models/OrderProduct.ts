@@ -1,16 +1,16 @@
 import { model, Schema, Types } from 'mongoose';
 
-const orderSchema = new Schema({
-  uid: {
+const orderProductSchema = new Schema({
+  oid: {
     type: Types.ObjectId,
     required: true,
-    ref: 'User',
+    ref: 'Order',
   },
 
-  did: {
+  pid: {
     type: Types.ObjectId,
     required: true,
-    ref: 'DeliverPersonnel',
+    ref: 'Product',
   },
   createdAt: {
     type: Date,
@@ -20,10 +20,9 @@ const orderSchema = new Schema({
 
 type Order = {
   _id: Types.ObjectId;
-  uid: Types.ObjectId;
-  did: Types.ObjectId;
+  oid: Types.ObjectId;
+  pid: Types.ObjectId;
   createdAt: Date;
-
 };
 
-export default model<Order>('Order', orderSchema);
+export default model<Order>('OrderProduct', orderProductSchema);
