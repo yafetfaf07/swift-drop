@@ -13,9 +13,9 @@ export class MerchantController {
     async (req, res, next) => {
       const firstname = req.body.firstname;
       const lastname = req.body.lastname;
+      const phone_no = req.body.phone_no;
       const passwordRaw = req.body.password;
       const address = req.body.address;
-      const phone_no = req.body.phone_no;
       try {
         if (!firstname || !lastname || !passwordRaw || !address || !phone_no) {
           throw createHttpError(400, 'Please enter valid credentials ');
@@ -32,13 +32,14 @@ export class MerchantController {
         const newMerchant = await this.__services.createMerchant(
           firstname,
           lastname,
-          passwordRaw,
           phone_no,
+          passwordRaw,
           address,
         );
 
         res.status(201).json(newMerchant);
       } catch (error) {
+        console.error("This is my erroroooooooo",error);
         next(error);
       }
     };

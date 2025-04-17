@@ -19,14 +19,17 @@ export class MerchantService {
     lastname: string,
     phone_no: string,
     password: string,
-    address: [number],
+    address: {
+        latitude: number,
+        longitude: number,
+    },
   ) {
     return await Merchant.create({
       firstname: firstname,
       lastname: lastname,
-      address: address,
-      password: password,
       phone_no: phone_no,
+      password: password,
+      address: address,
     });
   }
 }

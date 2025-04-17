@@ -7,7 +7,10 @@ export interface MerchantDTO {
   lastname:string,
   phone_no:string,
   password:string,
-  address:[number]
+  address:{
+    latitude:number,
+    longitude:number
+  }
 }
 export interface MerchantLogin {
   phone_no:string;
@@ -19,7 +22,10 @@ export interface ProfileChangeDTO {
     firstname:string,
     lastname:string,
     phone_no:string,
-    address:[number]
+    address:{
+      latitude:number,
+      longitude:number
+    }
 }
 
 // This is for changing password

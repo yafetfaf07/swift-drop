@@ -6,7 +6,10 @@ export class UserService {
     lastname: string,
     phone_no: string,
     password: string,
-    address: [number],
+    address: {
+      latitude: number;
+      longitude: number;
+    },
   ) {
     return await User.create({
       firstname: firstname,
@@ -23,6 +26,6 @@ export class UserService {
     return await User.findOne({ phone_no: phone_no,  }).exec();
   }
   async login(phone_no: string, password:string ) {
-    return await User.find({ phone_no: phone_no, password:password  }).exec();
+    return await User.findOne({ phone_no: phone_no, password:password  });
   }
 }
