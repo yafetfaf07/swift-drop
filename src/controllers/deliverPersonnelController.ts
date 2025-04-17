@@ -9,7 +9,7 @@ export class DeliverPersonnelController {
   constructor(ms: DeliverPersonnelService) {
     this.__services = ms;
   }
-  createMerchant: RequestHandler<unknown, unknown, DeliverPersonnelDTO, unknown> =
+  createDeliverPersonnel: RequestHandler<unknown, unknown, DeliverPersonnelDTO, unknown> =
     async (req, res, next) => {
       const firstname = req.body.firstname;
       const lastname = req.body.lastname;

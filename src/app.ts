@@ -10,7 +10,44 @@ import { UserController } from './controllers/userController';
 import { ProductService } from './services/ProductService';
 import { ProductController } from './controllers/productController';
 import { ProductRouter } from './routes/productrouter';
+
+
+
+
 const app = express();
+
+// import multer from 'multer';
+import path from 'path';
+import fs from 'fs';
+import { DeliverPersonnelService } from './services/DeliverPersonnelService';
+import { DeliverPersonnelController } from './controllers/deliverPersonnelController';
+import { DeliverPersonnelRouter } from './routes/deliverpersonnelrouter';
+import { OrderService } from './services/OrderService';
+import { OrderController } from './controllers/orderController';
+import { OrderRouter } from './routes/orderrouter';
+
+// Ensure the upload directory exists
+const uploadDir = path.join(process.cwd(), 'uploads'); // Relative to project root
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true });
+}
+
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, uploadDir); // Use the verified directory
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, file.originalname); 
+//   }
+// });
+
+// const upload = multer({
+//   storage: storage,
+//   limits: { fileSize: 5 * 1024 * 1024 }, // Optional: limit file size to 5MB
+// }).single('file');
+
+// Express route with error handling
+
 
 app.use(morgan('dev')); // used for better debugging for mongodb databases
 
@@ -34,7 +71,19 @@ const ProductServices = new ProductService();
 const ProductControllers = new ProductController(ProductServices);
 const ProductRouters = new ProductRouter(ProductControllers);
 
+// This for Deliver Personnel (This is where DI is happening)
 
+const DeliverPersonnelServices=new DeliverPersonnelService();
+const DeliverPersonnelControllers=new DeliverPersonnelController(DeliverPersonnelServices);
+const DeliverPersonnelRoutes=new DeliverPersonnelRouter(DeliverPersonnelControllers);
+
+//  This is for Order (This is where DI is happening)
+const OrderServices = new OrderService();
+const OrderControllers = new OrderController(OrderServices);
+const OrderRouters = new OrderRouter(OrderControllers);
+
+app.use('/api/order', OrderRouters.registerRoutes());
+app.use('/api/deliver',DeliverPersonnelRoutes.registerRoutes());
 app.use('/api/users', UserRouters.registerRoutes())
 app.use('/api/merchant',MerchantRoutes.registerRoutes());
 app.use('/api/product',ProductRouters.registerRoutes());

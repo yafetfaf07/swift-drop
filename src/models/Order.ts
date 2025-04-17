@@ -13,7 +13,7 @@ const orderSchema = new Schema({
     ref: 'DeliverPersonnel',
   },
   createdAt: {
-    type: Date,
+    type:  Date,
     default: Date.now,
   },
 });

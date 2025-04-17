@@ -14,12 +14,9 @@ const deliverSchema = new Schema({
     required: true,
     unique: true,
   },
-  address: {
-    type: {},
-    required: true,
+  address:{
+    type:{}
   },
-
-
   password: {
     type: String,
     required: true,
@@ -28,12 +25,14 @@ const deliverSchema = new Schema({
 
 type DeliverPersonnel = {
   _id: Types.ObjectId;
-  firstname:string,
-  lastname:string,
-  phone_no:string,
-  address:string[],
+  firstname: string;
+  lastname: string;
+  phone_no: string;
+  address: {
+    latitude: number;
+    longitude: number;
+  };
   password: string;
-
 };
 
 export default model<DeliverPersonnel>('DeliverPersonnel', deliverSchema);
