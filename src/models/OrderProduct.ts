@@ -19,7 +19,6 @@ const orderProductSchema = new Schema({
 });
 
 type Order = {
-  _id: Types.ObjectId;
   oid: Types.ObjectId;
   pid: Types.ObjectId;
   createdAt: Date;

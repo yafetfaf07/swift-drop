@@ -10,7 +10,9 @@ export interface MerchantDTO {
   address:{
     latitude:number,
     longitude:number
-  }
+  },
+  openingTime:string,
+  closingTime:string
 }
 export interface MerchantLogin {
   phone_no:string;

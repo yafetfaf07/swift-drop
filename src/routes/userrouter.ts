@@ -12,7 +12,7 @@ export class UserRouter {
         this.router.post('/signup', this._controller.createUser.bind(this._controller));
         // this.router.get('/getAllUser', this._controller.getAllUser);
         // this.router.post('/getUserByPhoneNumber', this._controller.getUserByPhoneNumber);
-        this.router.get('/login', this._controller.login.bind(this._controller));
+        this.router.get('/login/:phone_no/:password', this._controller.login.bind(this._controller));
         return this.router;
     }
 }

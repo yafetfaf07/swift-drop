@@ -23,6 +23,8 @@ export class MerchantService {
         latitude: number,
         longitude: number,
     },
+    openingTime:string,
+    closingTime:string
   ) {
     return await Merchant.create({
       firstname: firstname,
@@ -30,6 +32,8 @@ export class MerchantService {
       phone_no: phone_no,
       password: password,
       address: address,
+      openingTime:openingTime,
+      closingTime:closingTime
     });
   }
 }

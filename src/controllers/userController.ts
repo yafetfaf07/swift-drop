@@ -30,13 +30,13 @@ export class UserController {
       }
       // This is
       // const hashedPassword = await argon2.hash(passwordRaw);
-      const newUser = await user.create({
-        firstname: firstname,
-        lastname: lastname,
-        password: passwordRaw,
-        address: address,
-        phone_no: phone_no,
-      });
+      const newUser = await this.__services.createUser(
+      firstname,
+      lastname,
+      phone_no,
+      passwordRaw,
+      address,
+      );
 
       res.status(201).json(newUser);
     } catch (error) {
@@ -44,13 +44,13 @@ export class UserController {
     }
   };
 
-  login: RequestHandler<unknown, unknown, LoginDTO, unknown> = async (
+  login: RequestHandler<LoginDTO, unknown, unknown, unknown> = async (
     req,
     res,
     next,
   ) => {
-    const phone_no = req.body.phone_no;
-    const password = req.body.password;
+    const phone_no = req.params.phone_no;
+    const password = req.params.password;
 
     if (!phone_no || !password) {
       throw createHttpError(400, 'Please enter credentials');

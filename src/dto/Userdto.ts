@@ -7,7 +7,10 @@ export interface UserDTO {
     lastname:string,
     phone_no:string,
     password:string,
-    address:[number]
+    address:{
+        latitude:number,
+        longitude:number
+    }
 }
 
 // This is for login

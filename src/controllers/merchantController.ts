@@ -16,8 +16,10 @@ export class MerchantController {
       const phone_no = req.body.phone_no;
       const passwordRaw = req.body.password;
       const address = req.body.address;
+      const openingTime=req.body.openingTime;
+      const closingTime=req.body.closingTime;
       try {
-        if (!firstname || !lastname || !passwordRaw || !address || !phone_no) {
+        if (!firstname || !lastname || !passwordRaw || !address || !phone_no || !closingTime || !openingTime) {
           throw createHttpError(400, 'Please enter valid credentials ');
         }
 
@@ -35,6 +37,8 @@ export class MerchantController {
           phone_no,
           passwordRaw,
           address,
+          openingTime,
+          closingTime
         );
 
         res.status(201).json(newMerchant);

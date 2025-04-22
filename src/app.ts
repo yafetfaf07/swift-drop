@@ -25,6 +25,9 @@ import { DeliverPersonnelRouter } from './routes/deliverpersonnelrouter';
 import { OrderService } from './services/OrderService';
 import { OrderController } from './controllers/orderController';
 import { OrderRouter } from './routes/orderrouter';
+import { CommentService } from './services/CommentService';
+import { CommentController } from './controllers/commentController';
+import { CommentRouter } from './routes/commentroutes';
 
 // Ensure the upload directory exists
 const uploadDir = path.join(process.cwd(), 'uploads'); // Relative to project root
@@ -82,11 +85,18 @@ const OrderServices = new OrderService();
 const OrderControllers = new OrderController(OrderServices);
 const OrderRouters = new OrderRouter(OrderControllers);
 
+//This is for Comments (This is where DI is happening)
+
+const CommentServices = new CommentService();
+const CommentControllers = new CommentController(CommentServices);
+const CommentRoutes = new CommentRouter(CommentControllers);
+
 app.use('/api/order', OrderRouters.registerRoutes());
 app.use('/api/deliver',DeliverPersonnelRoutes.registerRoutes());
 app.use('/api/users', UserRouters.registerRoutes())
 app.use('/api/merchant',MerchantRoutes.registerRoutes());
 app.use('/api/product',ProductRouters.registerRoutes());
+app.use('/api/comments', CommentRoutes.registerRoutes())
 
 app.use((req, res, next) => {
   next(createHttpError(404,'Endpoint not found'));

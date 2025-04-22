@@ -20,13 +20,19 @@ const merchantSchema = new Schema({
     // required: true,
   },
 
-
-
   password: {
     type: String,
     required: true,
     // select: false,
   },
+  openingTime: {
+    type:String,
+    required:true
+  },
+  closingTime: {
+    type:String,
+    required:true
+  }
 
 });
 
@@ -39,6 +45,8 @@ type Merchant = {
   // oid: Types.ObjectId[]; // order id
   // pid: Types.ObjectId[]; // product id
   password: string;
+  openingTime:string;
+  closingTime:string;
 
   //   notes: Types.ObjectId[];
 };
