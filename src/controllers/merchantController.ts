@@ -1,5 +1,4 @@
 import createHttpError from 'http-errors';
-import Merchant from '../models/Merchant';
 import { RequestHandler } from 'express';
 import { MerchantDTO, MerchantLogin } from '../dto/Merchantdto';
 import { MerchantService } from '../services/MerchantService';
@@ -50,8 +49,8 @@ export class MerchantController {
 
   //For Getting all Users
 
-  getAllUser: RequestHandler = async (req, res, next) => {
-    const allUsers = await Merchant.find().exec();
+  getAllMerchant: RequestHandler = async (req, res, next) => {
+    const allUsers = await this.__services.getAllMerchant();
 
     try {
       if (!allUsers) {

@@ -3,7 +3,39 @@ import Merchant from '../models/Merchant';
 
 export class MerchantService {
   async getAllMerchant() {
-    return await Merchant.find().exec();
+    const merchants = await Merchant.aggregate([
+      {
+        $lookup: {
+          from: "comments",        // MongoDB collection name (not model name)
+          localField: "_id",       // match Merchant._id
+          foreignField: "mid",     // match Comment.mid
+          as: "ratings"            // this is an array of matching comments
+        }
+      },
+      {
+        $addFields: {
+          overallRating: {
+            $cond: [
+              { $gt: [{ $size: "$ratings" }, 0] },
+              {
+                $divide: [
+                  { $sum: "$ratings.rating" },
+                  { $size: "$ratings" }
+                ]
+              },
+              null  // or 0 if you prefer
+            ]
+          }
+        }
+      },
+      {
+        $project: {
+          ratings: 0  // ❌ Hide raw comments array, ✅ keep everything else
+        }
+      }
+    ]);
+
+    return merchants;
   }
 
   async login(phone_no: string,password:string ) {

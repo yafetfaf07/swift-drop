@@ -51,4 +51,59 @@ export class ProductController {
         next(error);
       }
     };
+
+    getProduct:RequestHandler=async(req,res,next) => {
+      
+      try {
+        const getAllProduct = await this._services.getAllProduct();
+        
+        if(!getAllProduct) {
+          throw createHttpError(404,"There is no Product");
+        }
+        res.status(200).json(getAllProduct)
+      } catch (error) {
+        console.error(error);
+        next(error);
+      }
+    }
+
+    getProductById:RequestHandler<{id:string},unknown,unknown,unknown> = async(req,res,next) => {
+try {
+  const id = new mongoose.Types.ObjectId(req.params.id);
+
+
+  const getProductById = await this._services.getAllProductById(id);
+  if(getProductById.length==0) throw createHttpError(404,"No ProductFound");
+else {
+
+  res.status(200).json(getProductById);
+}
+
+} catch (error) {
+console.error(error);
+next(error);
+  
+}
+      
+
+    }
+
+    getProductByMerchantId:RequestHandler<{id:string}, unknown,unknown,unknown> =async(req,res,next) => {
+      const id = new mongoose.Types.ObjectId(req.params.id);
+      try {
+        const getProductByMerchantId = await this._services.getProductByMerchantId(id);
+        if(getProductByMerchantId.length==0) {
+          throw createHttpError(404,"No Products found");
+        }
+        else {
+          res.status(200).json(getProductByMerchantId);
+        }
+        
+      } catch (error) {
+        console.error(error);
+        next(error);
+        
+      }
+
+    }
 }

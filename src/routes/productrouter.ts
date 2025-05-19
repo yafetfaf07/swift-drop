@@ -14,9 +14,10 @@ export class ProductRouter {
       upload.single('file'),
       this._controller.createProduct.bind(this._controller),
     );
-    // this.router.get('/getAllProducts', this._controller.getAllProducts);
+    this.router.get('/getProduct', this._controller.getProduct.bind(this._controller));
     // this.router.get('/getProductByName', this._controller.getProductByName);
-    // this.router.get('/getProductById/:id', this._controller.getProductById);
+    this.router.get('/getProductById/:id', this._controller.getProductById.bind(this._controller));
+    this.router.get("/getProductByMerchantId/:id",this._controller.getProductByMerchantId.bind(this._controller));
     return this.router;
   }
 }

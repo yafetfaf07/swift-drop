@@ -22,9 +22,13 @@ export class ProductService {
     async getAllProduct() {
         return await Product.find().exec();
     }
+    async getAllProductById(id:mongoose.Types.ObjectId) {
+        
+        return await Product.find({_id:id});
+    }
     
-    async getProductByMerchantId(merchant_id: string) {
-        return await Product.find({ merchant_id: merchant_id }).exec();
+    async getProductByMerchantId(merchant_id: mongoose.Types.ObjectId) {
+        return await Product.find({ mid: merchant_id }).exec();
     }
 
     async getProductByName(name:string) {

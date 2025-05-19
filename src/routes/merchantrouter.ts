@@ -14,6 +14,7 @@ export class MerchantRouter {
     registerRoutes() {
         this.router.post('/signup', this._controller.createMerchant.bind(this._controller));
         this.router.get('/login', this._controller.login.bind(this._controller));
+        this.router.get('/getAllMerchant', this._controller.getAllMerchant.bind(this._controller));
         return this.router;
     }
 

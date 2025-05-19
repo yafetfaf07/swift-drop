@@ -41,4 +41,22 @@ export class OrderController {
             next(error);
         }
     };
+
+    getOrder:RequestHandler<{id:string}, unknown, unknown> = async(req,res,next) => {
+      const id = new mongoose.Types.ObjectId(req.params.id);
+      try {
+        const getOrder = await this._services.getUserOrderedProducts(id);
+        if(getOrder.length==0) {
+          throw createHttpError(404,"No orders found")
+        }
+        else {
+          res.status(200).json(getOrder);
+        }
+        
+      } catch (error) {
+        console.error(error);
+        next(error);
+      }
+   
+    }
 }
