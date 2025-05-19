@@ -18,7 +18,6 @@ const app = express();
 
 // import multer from 'multer';
 import path from 'path';
-import fs from 'fs';
 import { DeliverPersonnelService } from './services/DeliverPersonnelService';
 import { DeliverPersonnelController } from './controllers/deliverPersonnelController';
 import { DeliverPersonnelRouter } from './routes/deliverpersonnelrouter';
@@ -30,16 +29,15 @@ import { CommentController } from './controllers/commentController';
 import { CommentRouter } from './routes/commentroutes';
 
 // Ensure the upload directory exists
-const uploadDir = path.join(process.cwd(), 'uploads'); // Relative to project root
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir, { recursive: true });
-}
-
+// const uploadDir = path.join(process.cwd(), 'uploads'); // Relative to project root
+// if (!fs.existsSync(uploadDir)) {
+//   fs.mkdirSync(uploadDir, { recursive: true });
+// }
 // const storage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     cb(null, uploadDir); // Use the verified directory
-//   },
-//   filename: function (req, file, cb) {
+  //   destination: function (req, file, cb) {
+    //     cb(null, uploadDir); // Use the verified directory
+    //   },
+    //   filename: function (req, file, cb) {
 //     cb(null, file.originalname); 
 //   }
 // });
@@ -91,6 +89,9 @@ const CommentServices = new CommentService();
 const CommentControllers = new CommentController(CommentServices);
 const CommentRoutes = new CommentRouter(CommentControllers);
 
+app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
+
+// app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/api/order', OrderRouters.registerRoutes());
 app.use('/api/deliver',DeliverPersonnelRoutes.registerRoutes());
 app.use('/api/users', UserRouters.registerRoutes())
