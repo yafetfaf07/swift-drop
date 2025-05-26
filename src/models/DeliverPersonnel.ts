@@ -21,6 +21,16 @@ const deliverSchema = new Schema({
     type: String,
     required: true,
   },
+  isActive:{
+    type:Boolean,
+    default:false,
+    required:true
+  },
+  noOfOrder: {
+    type:Number,
+    required:true,
+    default:0
+  }
 });
 
 type DeliverPersonnel = {

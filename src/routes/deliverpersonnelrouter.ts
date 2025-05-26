@@ -12,7 +12,8 @@ export class DeliverPersonnelRouter {
 
     registerRoutes() {
         this.router.post('/signup', this._controller.createDeliverPersonnel.bind(this._controller));
-        this.router.get('/login', this._controller.login.bind(this._controller));
+        this.router.get('/login/:phone_no/:password', this._controller.login.bind(this._controller));
+        this.router.get('/getAll', this._controller.getAllDelivery);
         return this.router;
     }
 }

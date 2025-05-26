@@ -18,6 +18,7 @@ export class ProductRouter {
     // this.router.get('/getProductByName', this._controller.getProductByName);
     this.router.get('/getProductById/:id', this._controller.getProductById.bind(this._controller));
     this.router.get("/getProductByMerchantId/:id",this._controller.getProductByMerchantId.bind(this._controller));
+    this.router.get("/getProductByCategory/:category", this._controller.getProductByCategory.bind(this._controller));
     return this.router;
   }
 }

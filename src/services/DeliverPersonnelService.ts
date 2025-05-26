@@ -2,7 +2,7 @@ import DeliverPersonnel from "../models/DeliverPersonnel";
 // import * as argon2 from 'argon2'; // used for hashing password
 
 export class DeliverPersonnelService {
-  async getAllMerchant() {
+  async getAllDelivery() {
     return await DeliverPersonnel.find().exec();
   }
 

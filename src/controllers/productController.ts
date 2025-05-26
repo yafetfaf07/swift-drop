@@ -106,4 +106,21 @@ next(error);
       }
 
     }
+
+    getProductByCategory:RequestHandler<{category:string},unknown,unknown,unknown> = async(req,res,next) => {
+      try {
+        const getProductByCategory = await this._services.getProductByCategory(req.params.category);
+
+        if(getProductByCategory.length==0) {
+          console.log(getProductByCategory);
+          throw createHttpError(404, "No Merchant found")
+        }
+        else {
+          res.status(200).json(getProductByCategory);
+        }
+      } catch (error) {
+        console.error(error);
+        next(error);
+      }
+    }
 }

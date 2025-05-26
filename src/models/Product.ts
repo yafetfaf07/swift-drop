@@ -2,7 +2,7 @@ import { model, Schema, Types } from 'mongoose';
 
 const productSchema = new Schema({
   mid: {
-    type: Schema.Types.ObjectId,
+    type: Types.ObjectId,
     required: true,
     ref: 'Merchant',
   },

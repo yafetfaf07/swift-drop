@@ -1,8 +1,8 @@
 import createHttpError from 'http-errors';
-import Merchant from '../models/Merchant';
 import { RequestHandler } from 'express';
 import { DeliverPersonnelDTO, DeliverPersonnelLogin } from '../dto/DeliverPersonneldto';
 import { DeliverPersonnelService} from '../services/DeliverPersonnelService';
+import DeliverPersonnel from '../models/DeliverPersonnel';
 
 export class DeliverPersonnelController {
   private __services: DeliverPersonnelService;
@@ -44,31 +44,17 @@ export class DeliverPersonnelController {
       }
     };
 
-  //For Getting all Users
 
-  getAllUser: RequestHandler = async (req, res, next) => {
-    const allUsers = await Merchant.find().exec();
-
-    try {
-      if (!allUsers) {
-        throw createHttpError(404, 'No merchants found');
-      }
-
-      res.status(200).json(allUsers);
-    } catch (error) {
-      next(error);
-    }
-  };
 
   // For login purposes
 
-  login: RequestHandler<unknown, unknown, DeliverPersonnelLogin, unknown> = async (
+  login: RequestHandler<DeliverPersonnelLogin, unknown, unknown, unknown> = async (
     req,
     res,
     next,
   ) => {
-    const phone_no = req.body.phone_no;
-    const password = req.body.password;
+    const phone_no = req.params.phone_no;
+    const password = req.params.password;
 
     if (!phone_no || !password) {
       throw createHttpError(400, 'Please enter a username');
@@ -83,5 +69,22 @@ export class DeliverPersonnelController {
       next(error);
     }
   };
+
+  getAllDelivery:RequestHandler=async(req,res,next) => {
+    
+    try {
+const allDelivery = await DeliverPersonnel.find().exec();
+      if(!allDelivery) {
+        throw createHttpError(404, "No Delivery found");
+      }
+      else {
+        res.status(200).json(allDelivery);
+      }
+    } catch (error) {
+      console.error(error);
+      next(error);
+    }
+  }
+  
 }
 // For creating Merchant

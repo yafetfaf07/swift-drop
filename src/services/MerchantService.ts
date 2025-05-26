@@ -30,7 +30,10 @@ export class MerchantService {
       },
       {
         $project: {
-          ratings: 0  // ❌ Hide raw comments array, ✅ keep everything else
+          overallRating: 1, // ❌ Hide raw comments array, ✅ keep everything else
+          firstname:1,
+          address:1,
+          
         }
       }
     ]);

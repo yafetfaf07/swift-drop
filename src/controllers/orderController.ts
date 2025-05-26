@@ -42,7 +42,7 @@ export class OrderController {
         }
     };
 
-    getOrder:RequestHandler<{id:string}, unknown, unknown> = async(req,res,next) => {
+    getOrderByProductId:RequestHandler<{id:string}, unknown, unknown> = async(req,res,next) => {
       const id = new mongoose.Types.ObjectId(req.params.id);
       try {
         const getOrder = await this._services.getUserOrderedProducts(id);
@@ -58,5 +58,22 @@ export class OrderController {
         next(error);
       }
    
+    }
+    getOrderByDeliveryId:RequestHandler<{id:string}, unknown, unknown,unknown> = async(req,res,next) => {
+      const id = new mongoose.Types.ObjectId(req.params.id);
+
+      try {
+        const getOrder = await this._services.getOrderByDeliveryId(id);
+        if(getOrder.length==0) {
+          throw createHttpError({message:"No order found"})
+        } 
+        else {
+          res.status(200).json(getOrder);
+        } 
+      
+      } catch (error) {
+        console.error(error);
+        next(error);
+      }
     }
 }

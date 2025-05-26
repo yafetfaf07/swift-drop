@@ -12,7 +12,9 @@ export class OrderRouter {
 
     registerRoutes() {
         this.router.post("/create", this._controller.createOrder.bind(this._controller));
-        this.router.get("/get/:id", this._controller.getOrder.bind(this._controller))
+        this.router.get("/getOrderByProductId/:id", this._controller.getOrderByProductId.bind(this._controller));
+        this.router.get('/getOrderByDeliverId/:id', this._controller.getOrderByDeliveryId.bind(this._controller));
+
         return this.router;
     }
 }
